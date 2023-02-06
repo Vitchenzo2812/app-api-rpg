@@ -14,6 +14,7 @@
 
    #### Character
       - id
+      - idUser
       - name
       - history
       - ?image -> think (For now, replace with appearance description)
@@ -22,9 +23,9 @@
       - NEX (level)
       - class
       - trial (depends on the class)
-      - PV (depends on the class and NEX and modifications)
-      - PE (depends on the class and NEX and modifications)
-      - SAN (depends on the class and NEX and modifications)
+      - PV (depends on the class and NEX)
+      - PE (depends on the class and NEX)
+      - SAN (depends on the class)
       - defense (depends attributes and modifications)
       - displacement -> think
       - attributes (depends on the NEX)
