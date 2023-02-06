@@ -1,4 +1,4 @@
-import { Attributes } from "./Attributes";
+import { Attribute } from "./Attributes";
 
 export class Skills {
     skills = [
@@ -17,7 +17,7 @@ export class Skills {
     ]
 
     constructor(
-        readonly attributes: Attributes,
+        readonly attributes: Attribute,
         readonly needsForSkills: object[],
     ) { }
 }

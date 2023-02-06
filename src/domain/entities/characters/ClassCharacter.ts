@@ -1,6 +1,7 @@
 import { ApplicationError } from "../Error"
-import { Attributes } from "./Attributes";
+import { Attribute } from "./Attributes";
 import { Powers } from "./Powers";
+import { Trials } from "./Trials";
 
 interface IProficiencies {
     simple_weapons: boolean,
@@ -17,10 +18,11 @@ export class ClassCharacter {
         public PV: number,
         public PE: number,
         public SAN: number,
-        readonly trial: string,
-        readonly powers: Powers,
+        readonly trial: Trials,
         readonly proficiencies: IProficiencies,
-        readonly attributes: Attributes,
+        readonly attributes: Attribute,
+        readonly classPowers: Powers,
+        readonly paranormalPowers?: Powers,
     ) {
 
         if (!this.nameClass) throw new ApplicationError('Choose a class!', 400)
@@ -35,6 +37,11 @@ export class ClassCharacter {
                     light_protection: true,
                     heavy_protection: false,
                 }
+
+                this.trial.combatantTrial;
+                this.classPowers.classCharacter.combatant;
+                this.paranormalPowers?.paranormal?.paranormalPowes;
+
                 break;
 
             case "specialist":
@@ -45,6 +52,11 @@ export class ClassCharacter {
                     light_protection: true,
                     heavy_protection: false,
                 }
+
+                this.trial.specialistTrial;
+                this.classPowers.classCharacter.specialist;
+                this.paranormalPowers?.paranormal?.paranormalPowes;
+
                 break;
 
             case "occultist":
@@ -55,505 +67,519 @@ export class ClassCharacter {
                     light_protection: false,
                     heavy_protection: false,
                 }
+
+                this.trial.occultistTrial;
+                this.classPowers.classCharacter.occultist;
+                this.paranormalPowers?.paranormal?.paranormalPowes;
+
                 break;
         }
+
     }
 
-    calcPV() {
+    calcLvlUp() {
+        return this.nex += 5;
+    }
+
+    calcLvlUpPV() {
+        const attribute = this.attributes.attributes.find(att => att.name === "force")!
+
         switch (this.nameClass) {
             case "combatant":
-                this.PV = (20 + this.attributes.force)
+                this.PV = (20 + attribute.points)
                 switch (this.nex) {
                     case 10:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 15:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 20:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 25:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 30:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 35:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 40:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 45:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 50:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 55:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 60:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 65:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 70:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 75:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 80:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 85:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 90:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 95:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
 
                     case 100:
-                        this.PV += (4 + this.attributes.force)
+                        this.PV += (4 + attribute.points)
                         break;
                 }
                 break;
 
             case "specialist":
-                this.PV = (16 + this.attributes.force)
+                this.PV = (16 + attribute.points)
                 switch (this.nex) {
                     case 10:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 15:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 20:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 25:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 30:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 35:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 40:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 45:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 50:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 55:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 60:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 65:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 70:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 75:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 80:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 85:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 90:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 95:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
 
                     case 100:
-                        this.PV += (3 + this.attributes.force)
+                        this.PV += (3 + attribute.points)
                         break;
                 }
                 break;
 
             case "occultist":
-                this.PV = (12 + this.attributes.force)
+                this.PV = (12 + attribute.points)
                 switch (this.nex) {
                     case 10:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 15:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 20:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 25:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 30:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 35:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 40:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 45:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 50:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 55:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 60:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 65:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 70:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 75:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 80:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 85:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 90:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 95:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
 
                     case 100:
-                        this.PV += (2 + this.attributes.force)
+                        this.PV += (2 + attribute.points)
                         break;
                 }
                 break;
         }
     }
 
-    calcPE() {
+    calcLvlUpPE() {
+        const attribute = this.attributes.attributes.find(att => att.name === "presence")!
+
         switch (this.nameClass) {
             case "combatant":
-                this.PE = (2 + this.attributes.presence)
+                this.PE = (2 + attribute.points)
                 switch (this.nex) {
                     case 10:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 15:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 20:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 25:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 30:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 35:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 40:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 45:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 50:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 55:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 60:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 65:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 70:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 75:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 80:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 85:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 90:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 95:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
 
                     case 100:
-                        this.PE += (2 + this.attributes.presence)
+                        this.PE += (2 + attribute.points)
                         break;
                 }
                 break;
 
             case "specialist":
-                this.PE = (3 + this.attributes.presence)
+                this.PE = (3 + attribute.points)
                 switch (this.nex) {
                     case 10:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 15:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 20:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 25:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 30:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 35:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 40:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 45:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 50:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 55:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 60:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 65:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 70:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 75:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 80:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 85:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 90:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 95:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
 
                     case 100:
-                        this.PE += (3 + this.attributes.presence)
+                        this.PE += (3 + attribute.points)
                         break;
                 }
                 break;
 
             case "occultist":
-                this.PE = (4 + this.attributes.presence)
+                this.PE = (4 + attribute.points)
                 switch (this.nex) {
                     case 10:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 15:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 20:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 25:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 30:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 35:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 40:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 45:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 50:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 55:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 60:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 65:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 70:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 75:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 80:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 85:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 90:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 95:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
 
                     case 100:
-                        this.PE += (4 + this.attributes.presence)
+                        this.PE += (4 + attribute.points)
                         break;
                 }
                 break;
         }
     }
 
-    calcSAN() {
+    calcLvlUpSAN() {
         switch (this.nameClass) {
             case "combatant":
                 this.SAN = 12;

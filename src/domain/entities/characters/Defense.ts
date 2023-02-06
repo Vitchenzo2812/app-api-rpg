@@ -1,8 +1,8 @@
-import { Attributes } from "./Attributes";
+import { Attribute } from "./Attributes";
 
 export class Defense {
     constructor(
-        readonly attributes: Attributes,
+        readonly attributes: Attribute,
         readonly modifications: number,
     ) { }
 }
