@@ -1,7 +1,7 @@
 import { ApplicationError } from "../Error"
 
 export class Origins {
-    origins = [
+    static readonly origins = [
         "academic",
         "health_agent",
         "amnesic",
@@ -33,10 +33,10 @@ export class Origins {
     constructor(
         readonly origin: string
     ) {
-        for (this.origin in this.origins) {
-            if (!this.origins.includes(this.origin)) {
-                throw new ApplicationError('This origin not exists.', 400)
-            }
+        const originExists = Origins.origins.find(ori => ori === this.origin)!
+
+        if (!originExists) {
+            throw new ApplicationError('This origin not exists!', 400)
         }
     }
 }
