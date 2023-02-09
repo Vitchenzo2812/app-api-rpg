@@ -14,9 +14,10 @@ export class Attribute {
         { name: 'intellect', points: 0 }
     ]
 
+    private totalPoints: number;
+
     constructor(
         readonly nex: number,
-        public totalPoints: number,
     ) {
         this.totalPoints = 9;
 
@@ -44,7 +45,7 @@ export class Attribute {
             throw new ApplicationError('Invalid limit points!', 400)
         }
 
-        const attribute = this.attributes.find(att => att.name === attributeName)
+        const attribute = this.attributes.find(att => att.name === attributeName);
 
         if (!attribute) {
             throw new ApplicationError('This attribute not exists!', 400)
@@ -54,9 +55,9 @@ export class Attribute {
             throw new ApplicationError('Points limit exceeded!', 400)
         }
 
-        if (attribute.points + points > this.totalPoints) {
-            throw new ApplicationError('Not enough points available!', 400)
-        }
+        // if (attribute.points + points > this.totalPoints) {
+        //     throw new ApplicationError('Not enough points available!', 400)
+        // }
 
         attribute.points += points;
         this.totalPoints -= points;
