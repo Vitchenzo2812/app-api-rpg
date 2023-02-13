@@ -12,6 +12,14 @@ interface IProficiencies {
 }
 
 export class ClassCharacter {
+    readonly proficiencies: IProficiencies = {
+        simple_weapons: false,
+        tactical_weapons: false,
+        heavy_weapons: false,
+        light_protection: false,
+        heavy_protection: false
+    };
+
     constructor(
         public nex: number,
         readonly nameClass: string,
@@ -19,7 +27,6 @@ export class ClassCharacter {
         public PE: number,
         public SAN: number,
         readonly trial: Trials,
-        readonly proficiencies: IProficiencies,
         readonly attributes: Attribute,
         readonly classPowers: Powers,
         readonly paranormalPowers?: Powers,

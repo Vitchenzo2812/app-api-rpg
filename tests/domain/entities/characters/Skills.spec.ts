@@ -18,31 +18,37 @@ describe('Tests with Skills', () => {
                 attribute: "agility",
                 trainedLevel: {
                     trained: true,
-                    veteran: false,
+                    veteran: true,
                     expert: false,
                 }
             }
         ])
 
-        expect(sut).toEqual({
+        expect({ chosenSkills: sut }).toEqual({
             chosenSkills: [
                 {
                     name: "stunt",
                     attribute: "agility",
-                    trainedLevel: {
+                    charge: true,
+                    kit: false,
+                    needTrained: false,
+                    trainedLevel: [{
                         trained: true,
                         veteran: false,
                         expert: false,
-                    }
+                    }]
                 },
                 {
                     name: "initiative",
                     attribute: "agility",
-                    trainedLevel: {
+                    charge: false,
+                    kit: false,
+                    needTrained: false,
+                    trainedLevel: [{
                         trained: true,
-                        veteran: false,
+                        veteran: true,
                         expert: false,
-                    }
+                    }]
                 }
             ]
         })
@@ -81,6 +87,24 @@ describe('Tests with Skills', () => {
             ])
 
             expect(sut).toThrow('Some attribute is wrong!')
+        } catch (err) { }
+    })
+
+    it('should be throw error because need be trained in the skill', () => {
+        try {
+            const sut = new Skills([
+                {
+                    name: "crime",
+                    attribute: "agility",
+                    trainedLevel: {
+                        trained: false,
+                        veteran: false,
+                        expert: false,
+                    }
+                }
+            ])
+
+            expect(sut).toThrow('To use this skill, you must be trained!')
         } catch (err) { }
     })
 })
