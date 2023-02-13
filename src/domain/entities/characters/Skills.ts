@@ -3,9 +3,6 @@ import { ApplicationError } from "../Error";
 interface IChosenSkills {
     name: string;
     attribute: string;
-    charge?: boolean;
-    kit?: boolean;
-    needTrained?: boolean;
     trainedLevel: {
         trained: boolean;
         veteran: boolean;
@@ -362,8 +359,7 @@ export class Skills {
         const characterSkillsAttribute = this.chosenSkills.map(skill => skill.attribute);
         const allSkillsAttribute = Skills.skills.map(skill => skill.attribute);
 
-        // const characterTrainedLevel = this.chosenSkills.map(skill => skill.trainedLevel);
-        // const allSkillsTrainedLevel = Skills.skills.map(skill => skill.trainedLevel);
+        const characterTrainedLevel = this.chosenSkills.map(skill => skill.trainedLevel);
 
         for (const name of characterSkillsName) {
             if (!allSkillsName.includes(name)) {
@@ -377,8 +373,31 @@ export class Skills {
             }
         }
 
+        const characterSkills: object[] = [];
 
+        Skills.skills.filter(skill => {
+
+            this.chosenSkills.map(skillCharacter => skillCharacter.name).includes(skill.name)
+                ?
+                characterSkills.push({
+                    name: skill.name,
+                    attribute: skill.attribute,
+                    charge: skill.charge,
+                    kit: skill.kit,
+                    needTrained: skill.needTrained,
+                    trainedLevel: this.chosenSkills.filter(skills => skills.name === skill.name).map(trained => trained.trainedLevel)
+                })
+                :
+                []
+
+            for (const trained of characterTrainedLevel) {
+                if (skill.needTrained === true && trained.trained === false) {
+                    throw new ApplicationError('To use this skill, you must be trained!', 400)
+                }
+            }
+        }
+        );
+
+        return characterSkills as unknown as Skills;
     }
-
-
 }
