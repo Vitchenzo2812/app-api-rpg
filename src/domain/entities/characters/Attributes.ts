@@ -17,7 +17,7 @@ export class Attribute {
     private totalPoints: number;
 
     constructor(
-        readonly nex: number,
+        private readonly nex: number,
     ) {
         this.totalPoints = 9;
 
